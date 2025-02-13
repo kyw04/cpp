@@ -9,6 +9,8 @@
 */
 #include <iostream>
 
+typedef double (*Arith)(double, double); // typedef 키워드를 이용한 새로운 이름 선언
+
 double Add(double a, double b) { return a + b; }
 double Sub(double a, double b) { return a - b; }
 double Mul(double a, double b) { return a * b; }
@@ -16,7 +18,7 @@ double Div(double a, double b) { return a / b; }
 
 int main()
 {
-    double (*calc)(double, double) = NULL;
+    Arith calc = NULL;
     double num1 = 1, num2 = 3;
     char oper;
     std::cin >> oper;
