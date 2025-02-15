@@ -66,7 +66,7 @@ int main()
         int var = 10;
         int num = 2; // 자동 변수 
         std::cout << "괄호 안 num: " << num << std::endl;
-        std::cout << "괄호 안 var: " << num << std::endl;
+        std::cout << "괄호 안 var: " << var << std::endl;
     }
 
     for (int i = 0; i < 3; i++)
