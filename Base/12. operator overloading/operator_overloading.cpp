@@ -12,14 +12,14 @@
 
 struct Position
 {
-    int x;
-    int y;
+    double x;
+    double y;
 
-    Position(int, int);
+    Position(double, double);
     Position operator-(const Position&);
 };
 
-Position::Position(int _x, int _y) : x(_x), y(_y) { }
+Position::Position(double _x, double _y) : x(_x), y(_y) { }
 Position Position::operator-(const Position& _other)
 {
     return Position((x + _other.x)/2, (y + _other.y)/2);
@@ -34,11 +34,11 @@ Position operator-(const Position& _pos1, const Position& _pos2)
 
 int main()
 {
-    Position pos1(10, 15);
-    Position pos2(2, 5);
+    Position pos1(10.5, 15);
+    Position pos2(22.25, 5);
     Position result = pos1 - pos2;
 
-    std::cout << "pos1 - pos2 => x: " << result.x << ", y: " << result.y << std::endl;
+    std::cout << "두 지점의 중간 지점의 좌표는 x: " << result.x << ", y: " << result.y << "입니다." << std::endl;
 
     return 0;
 }
