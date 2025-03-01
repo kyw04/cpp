@@ -15,6 +15,7 @@ private:
 
 public:
     static int total_player_count; // 정적 멤버 변수 선언
+    static void PrintTotalPlayerCount(); // 정적 멤버 함수 선언 
 
     std::string name;
     int level;
@@ -31,10 +32,15 @@ int main()
     Player *p2 = new Player();
     Player *p3 = new Player();
     
-    std::cout << "현제 플레이어의 수: " << Player::total_player_count << std::endl; // 정적 멤버 변수 접근방식(크래스명::변수명) 
+    Player::PrintTotalPlayerCount(); // 정적 멤버 함수 접근(크래스명::함수명)
     delete(p1);
     delete(p3);
-    std::cout << "현제 플레이어의 수: " << Player::total_player_count << std::endl;
+    Player::PrintTotalPlayerCount();
 
     return 0;
+}
+
+void Player::PrintTotalPlayerCount() // 정적 멤버 함수 정의
+{
+    std::cout << "현제 플레이어의 수: " << Player::total_player_count << std::endl; // 정적 멤버 변수 접근(크래스명::변수명) 
 }
