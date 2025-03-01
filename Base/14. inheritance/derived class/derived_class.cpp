@@ -1,12 +1,12 @@
 /*
 클래스 상속(class inheritance)
     기존에 정의되어 있는 클래스의 모든 멤버 변수와 멤버 함수를 물려받아, 새로운 클래스를 작성하는 것을 의미합니다.
+    상속을 받을 때 받을 범위를 접근 제어자를 활용해 지정합니다.
     기존에 정의 되어 있던 클래스를 기초 클래스(base class) 또는 부모 클래스(parent class), 상위 클래스(super class)라고합니다.
     상속을 통해 새로 작성되는 클래스는 파생 클래스(derived class) 또는 자식 클래스(child class), 하위 클래스(sub class)라고합니다.
 
     상속의 장점으로는 부모 클래스의 멤버를 물려받아 재활용할 수 있습니다.
     또한 중복되는 부분을 부모 클래스에서 미리 작성하여 중복을 제거할 수도 있습니다.
-
 */
 #include <iostream>
 
@@ -25,7 +25,7 @@ public:
     }
 };
 
-class Cat : public Animal // 자식 클래스
+class Cat : public Animal // 자식 클래스 
 {
 private:
     std::string type;
