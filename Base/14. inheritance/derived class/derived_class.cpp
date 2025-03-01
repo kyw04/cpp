@@ -43,6 +43,7 @@ int main()
 {
     Cat cat("소코케", "두부", 1);
     cat.ShowCatInfo();
+    // 예제엔 없지만 변수도 사용 가능
 
     return 0;
 }
