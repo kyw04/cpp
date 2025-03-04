@@ -49,6 +49,7 @@ byte는 bit들이 8개가 모여있는 그룹을 의미합니다.
 
 int main()
 {
+// wcout을 다양한 환경에서 사용하기 위한 전처리 과정.
 #ifdef linux
     setlocale(LC_ALL, "ko_KR.utf8");
 #elif WIN32
