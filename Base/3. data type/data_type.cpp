@@ -68,7 +68,7 @@ int main()
 
     std::cout << "boolean: " << b << std::endl;
     std::cout << "character: " << c << std::endl;
-    std::wcout << L"wid character: " << wc << std::endl;
+    std::wcout << L"wid character: " << wc << std::endl; // wcout과 cout을 혼합하면 정의되지 않은 동작이 발생할 수 있음.
     std::cout << "integer: " << i << std::endl;
     std::cout << "long: " << l << std::endl;
     std::cout << "long long: " << ll << std::endl;
