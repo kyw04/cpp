@@ -13,7 +13,7 @@
 */
 #include <iostream>
 
-int globel_array[10]; // 전역 변수로 선언할 경우 초기화 하지 않아도 0으로 초기화 됨
+int global_array[10]; // 전역 변수로 선언할 경우 초기화 하지 않아도 0으로 초기화 됨
 int main()
 {
     // int array[10] = { 1, 2, 3, 4... }; // 초기화 (자료형 변수명[길이] = { 값 };)
