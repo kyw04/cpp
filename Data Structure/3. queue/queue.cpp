@@ -20,31 +20,31 @@ private:
     int front;
     int rear;
     int max_size;
-    int size;
 
 public:
     Queue(int _max_size)
     {
+        _max_size++;
         data = new int[_max_size];
         front = 0;
         rear = 0;
         max_size = _max_size;
-        size = 0;
     }
     ~Queue() { delete data; }
 
-    bool IsEmpty() { return size == 0; }
-    bool IsFull() { return size == max_size; }
+    bool IsEmpty() { return front == rear; }
+    bool IsFull() { return (rear + 1) % max_size == front; }
     void Push(int _value)
     {
         if (!IsFull())
         {
             data[rear] = _value;
             rear = (rear + 1) % max_size;
-            size++;
+            
+            return;
         }
-        else
-            std::cout << "큐가 가득 찼습니다." << std::endl;
+
+        std::cout << "큐가 가득 찼습니다." << std::endl;
     }
     int Pop()
     {
@@ -52,7 +52,6 @@ public:
         {
             int result = data[front];
             front = (front + 1) % max_size;
-            size--;
 
             return result;
         }
