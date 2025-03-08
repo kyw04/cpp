@@ -29,7 +29,7 @@ public:
         top = 0;
         max_size = _max_size;
     }
-    ~Stack() { delete data; }
+    ~Stack() { delete[] data; }
 
     bool IsEmpty() { return top <= 0; }
     bool IsFull() { return top >= max_size; }

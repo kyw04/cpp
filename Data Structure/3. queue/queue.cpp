@@ -30,7 +30,7 @@ public:
         rear = 0;
         max_size = _max_size;
     }
-    ~Queue() { delete data; }
+    ~Queue() { delete[] data; }
 
     bool IsEmpty() { return front == rear; }
     bool IsFull() { return (rear + 1) % max_size == front; }
