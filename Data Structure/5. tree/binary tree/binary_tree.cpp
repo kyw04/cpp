@@ -38,8 +38,8 @@ int main()
     tree[5] = 5;
     tree[6] = 6;
     
-    std::cout << "루트 노드의 값: " << tree[1] << std::endl;
-    std::cout << "2번 노드 부모의 값: " << tree[2 / 2] << std::endl;
+    std::cout << "루트 노드 값: " << tree[1] << std::endl;
+    std::cout << "2번 노드의 부모 값: " << tree[2 / 2] << std::endl;
     std::cout << "2번 노드의 왼쪽 자식 값: " << tree[2 * 2] << std::endl;
     std::cout << "2번 노드의 오른쪽 자식 값: " << tree[2 * 2 + 1] << std::endl;
 
