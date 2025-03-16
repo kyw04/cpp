@@ -47,6 +47,7 @@ class HeapTree
 {
 private:
     Node* root;
+    std::vector<Node*> nodes;
 
 public:
     HeapTree(Node* _data = nullptr) : root(_data) { }    
@@ -58,32 +59,15 @@ public:
         if (root == nullptr)
         {
             root = new_data;
+            nodes.push_back(new Node(-1)); // 0번 인덱스는 사용하지 않음
+            nodes.push_back(new_data);
             return;
         }
         
-        std::queue<Node*> q;
-        q.push(root);
-        while (!q.empty())
-        {
-            Node* current_node = q.front();
-            q.pop();
-
-            if (!current_node->left)
-            {
-                new_data->parent = current_node; 
-                current_node->left = new_data;
-                break;
-            }
-            q.push(current_node->left);
-
-            if (!current_node->right)
-            {
-                new_data->parent = current_node; 
-                current_node->right = new_data;
-                break;
-            }
-            q.push(current_node->right);
-        }
+        nodes.push_back(new_data);
+        new_data->parent = nodes[(nodes.size()) / 2];
+        if (!new_data->parent->left) { new_data->parent->left = new_data; }
+        else { new_data->parent->right = new_data; }
 
         while (new_data->parent && new_data->parent->data > new_data->data)
         {
@@ -97,30 +81,17 @@ public:
 
     void Pop()
     {
-        Node* last_node = root;
-        std::queue<Node*> q;
-        q.push(root);
-        while (!q.empty())
-        {
-            Node* current_node = q.front();
-            q.pop();
+        if (!root) { return; }
 
-            if (current_node->left)
-            {
-                q.push(current_node->left);
-                last_node = current_node->left;
-            }
-            if (current_node->right)
-            {
-                q.push(current_node->right);
-                last_node = current_node->right;
-            }
-        }
-
+        Node* last_node = nodes.back();
         root->data = last_node->data;
-        if (last_node->parent->left == last_node) { last_node->parent->left = nullptr; }
-        else { last_node->parent->right = nullptr; }
+        if (last_node->parent)
+        {
+            if (last_node->parent->left == last_node) { last_node->parent->left = nullptr; }
+            else { last_node->parent->right = nullptr; }
+        }
         delete last_node;
+        nodes.pop_back();
 
         Node* current_node = root;
         while (current_node)
@@ -158,6 +129,10 @@ int main()
     heap.Insert(7);
     heap.Insert(15);
 
+    std::cout << heap.Front() << std::endl;
+    heap.Pop();
+    std::cout << heap.Front() << std::endl;
+    heap.Pop();
     std::cout << heap.Front() << std::endl;
     heap.Pop();
     std::cout << heap.Front() << std::endl;
