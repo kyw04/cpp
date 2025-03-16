@@ -60,7 +60,7 @@ public:
             root = new_data;
             return;
         }
-
+        
         std::queue<Node*> q;
         q.push(root);
         while (!q.empty())
@@ -95,14 +95,50 @@ public:
         }
     }
 
-    void Pop() // 작업중
+    void Pop()
     {
-        Node* lsat_node = nullptr;
+        Node* last_node = root;
         std::queue<Node*> q;
         q.push(root);
         while (!q.empty())
         {
-            
+            Node* current_node = q.front();
+            q.pop();
+
+            if (current_node->left)
+            {
+                q.push(current_node->left);
+                last_node = current_node->left;
+            }
+            if (current_node->right)
+            {
+                q.push(current_node->right);
+                last_node = current_node->right;
+            }
+        }
+
+        root->data = last_node->data;
+        if (last_node->parent->left == last_node) { last_node->parent->left = nullptr; }
+        else { last_node->parent->right = nullptr; }
+        delete last_node;
+
+        Node* current_node = root;
+        while (current_node)
+        {
+            Node* min_child_node = nullptr;
+            if (current_node->left) { min_child_node = current_node->left; }
+            if (current_node->right && min_child_node->data > current_node->right->data ) { min_child_node = current_node->right; }
+            if (!min_child_node) { break; }
+
+            if (current_node->data > min_child_node->data)
+            {
+                int temp = current_node->data;
+                current_node->data = min_child_node->data;
+                min_child_node->data = temp;
+
+                current_node = min_child_node;
+            }
+            else { break; }
         }
     }
 
@@ -123,5 +159,12 @@ int main()
     heap.Insert(15);
 
     std::cout << heap.Front() << std::endl;
+    heap.Pop();
+    std::cout << heap.Front() << std::endl;
+    heap.Pop();
+    std::cout << heap.Front() << std::endl;
+    heap.Pop();
+    std::cout << heap.Front() << std::endl;
+    
     return 0;
 }
