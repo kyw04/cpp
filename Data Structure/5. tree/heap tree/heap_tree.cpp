@@ -65,7 +65,7 @@ public:
         }
         
         nodes.push_back(new_data);
-        new_data->parent = nodes[(nodes.size()) / 2];
+        new_data->parent = nodes[(nodes.size() - 1) / 2];
         if (!new_data->parent->left) { new_data->parent->left = new_data; }
         else { new_data->parent->right = new_data; }
 
