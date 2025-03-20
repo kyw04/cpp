@@ -8,12 +8,12 @@
 */
 #include <iostream>
 
-void SelectionSort(int _array[], int len)
+void SelectionSort(int _array[], int _len)
 {
     int min_index = 0;
-    for (int i = 0; i < len - 1; i++)
+    for (int i = 0; i < _len - 1; i++)
     {
-        for (int j = i + 1; j < len; j++)
+        for (int j = i + 1; j < _len; j++)
         {
             if (_array[min_index] > _array[j])
             {

@@ -9,11 +9,11 @@
 */
 #include <iostream>
 
-void BubbleSrot(int _array[], int len)
+void BubbleSrot(int _array[], int _len)
 {
-    for (int i = 0; i < len - 1; i++)
+    for (int i = 0; i < _len - 1; i++)
     {
-        for (int j = 0; j < len - i - 1; j++)
+        for (int j = 0; j < _len - i - 1; j++)
         {
             if (_array[j] > _array[j + 1])
             {
