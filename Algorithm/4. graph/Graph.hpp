@@ -58,7 +58,7 @@ public:
 template <typename U>
 std::ostream& operator<<(std::ostream& os, const Graph<U> G)
 {
-    for (unsigned i = 1; i < G.GetVertices; i++)
+    for (unsigned i = 1; i < G.GetVertices(); i++)
     {
         os << i << ":\t";
 
@@ -68,6 +68,8 @@ std::ostream& operator<<(std::ostream& os, const Graph<U> G)
         
         os << std::endl;
     }
+
+    return os;
 }
 
 template <typename T>
@@ -87,7 +89,7 @@ Graph<T> GetReferenceGraph()
 
     Graph<T> G(9);
 
-    std::map<unsigned, std::vector<unsigned, T>> edge_map;
+    std::map<unsigned, std::vector<std::pair<unsigned, T>>> edge_map;
     edge_map[1] = { { 2, 0 }, { 5, 0 } };
     edge_map[2] = { { 1, 0 }, { 5, 0 }, { 4, 0 } };
     edge_map[3] = { { 4, 0 }, { 7, 0 } };
@@ -96,6 +98,10 @@ Graph<T> GetReferenceGraph()
     edge_map[6] = { { 4, 0 }, { 7, 0 }, { 8, 0 } };
     edge_map[7] = { { 3, 0 }, { 6, 0 } };
     edge_map[8] = { { 4, 0 }, { 5, 0 }, { 6, 0 } };
+
+    for (auto& i : edge_map)
+        for (auto& j : i.second)
+            G.AddEdge(Edge<T>{ i.first, j.first, j.second });
     
     return G;
 }
