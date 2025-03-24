@@ -72,32 +72,56 @@ std::ostream& operator<<(std::ostream& os, const Graph<U> G)
     return os;
 }
 
-template <typename T>
-Graph<T> GetReferenceGraph()
+enum class GraphType
 {
-    /*
-    
-    (1) ------  (5) --- (8)
-      \       /  ㅣ    /  \
-       \    /    ㅣ  /    \
-        (2) ---- (4) --- (6) 
-                /         /
-              /         /
-            (3) ---- (7)
-    
-    */
+    None,
+    Bipartite
+};
 
-    Graph<T> G(9);
+template <typename T>
+Graph<T> GetReferenceGraph(GraphType type = GraphType::None)
+{
+    Graph<T> G(10);
 
     std::map<unsigned, std::vector<std::pair<unsigned, T>>> edge_map;
-    edge_map[1] = { { 2, 0 }, { 5, 0 } };
-    edge_map[2] = { { 1, 0 }, { 5, 0 }, { 4, 0 } };
-    edge_map[3] = { { 4, 0 }, { 7, 0 } };
-    edge_map[4] = { { 2, 0 }, { 3, 0 }, { 5, 0 }, { 6, 0 }, { 8, 0 } };
-    edge_map[5] = { { 1, 0 }, { 2, 0 }, { 4, 0 }, { 8, 0 } };
-    edge_map[6] = { { 4, 0 }, { 7, 0 }, { 8, 0 } };
-    edge_map[7] = { { 3, 0 }, { 6, 0 } };
-    edge_map[8] = { { 4, 0 }, { 5, 0 }, { 6, 0 } };
+
+    switch (type)
+    {
+    case GraphType::None :
+        edge_map[1] = { { 2, 0 }, { 5, 0 } };
+        edge_map[2] = { { 1, 0 }, { 5, 0 }, { 4, 0 } };
+        edge_map[3] = { { 4, 0 }, { 7, 0 } };
+        edge_map[4] = { { 2, 0 }, { 3, 0 }, { 5, 0 }, { 6, 0 }, { 8, 0 } };
+        edge_map[5] = { { 1, 0 }, { 2, 0 }, { 4, 0 }, { 8, 0 } };
+        edge_map[6] = { { 4, 0 }, { 7, 0 }, { 8, 0 } };
+        edge_map[7] = { { 3, 0 }, { 6, 0 } };
+        edge_map[8] = { { 4, 0 }, { 5, 0 }, { 6, 0 } };
+        /*
+        (1) ------  (5) --- (8)
+        \       /  ㅣ    /  \
+        \    /    ㅣ  /    \
+            (2) ---- (4) --- (6) 
+                    /         /
+                /         /
+                (3) ---- (7)
+        */
+        break;
+
+    case GraphType::Bipartite :
+        edge_map[1] = { { 2, 0 } };
+        edge_map[2] = { { 1, 0 }, { 3, 0 }, { 8, 0 } };
+        edge_map[3] = { { 2, 0 }, { 4, 0 } };
+        edge_map[4] = { { 3, 0 }, { 6, 0 } };
+        edge_map[5] = { { 7, 0 }, { 9, 0 } };
+        edge_map[6] = { { 4, 0 } };
+        edge_map[7] = { { 5, 0 } };
+        edge_map[8] = { { 2, 0 }, { 9, 0 } };
+        edge_map[9] = { { 5, 0 }, { 8, 0 } };
+        break;
+    }
+   
+
+    
 
     for (auto& i : edge_map)
         for (auto& j : i.second)
