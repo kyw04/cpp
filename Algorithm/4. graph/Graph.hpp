@@ -1,6 +1,7 @@
 /*
 그래프 알고리즘()
 */
+#pragma once
 #include <iostream>
 #include <queue>
 #include <map>
@@ -88,14 +89,14 @@ Graph<T> GetReferenceGraph(GraphType type = GraphType::None)
     switch (type)
     {
     case GraphType::None :
-        edge_map[1] = { { 2, 0 }, { 5, 0 } };
-        edge_map[2] = { { 1, 0 }, { 5, 0 }, { 4, 0 } };
-        edge_map[3] = { { 4, 0 }, { 7, 0 } };
-        edge_map[4] = { { 2, 0 }, { 3, 0 }, { 5, 0 }, { 6, 0 }, { 8, 0 } };
-        edge_map[5] = { { 1, 0 }, { 2, 0 }, { 4, 0 }, { 8, 0 } };
-        edge_map[6] = { { 4, 0 }, { 7, 0 }, { 8, 0 } };
-        edge_map[7] = { { 3, 0 }, { 6, 0 } };
-        edge_map[8] = { { 4, 0 }, { 5, 0 }, { 6, 0 } };
+        edge_map[1] = { { 2, 2 }, { 5, 3 } };
+        edge_map[2] = { { 1, 2 }, { 5, 5 }, { 4, 1 } };
+        edge_map[3] = { { 4, 2 }, { 7, 3 } };
+        edge_map[4] = { { 2, 1 }, { 3, 2 }, { 5, 2 }, { 6, 4 }, { 8, 5 } };
+        edge_map[5] = { { 1, 3 }, { 2, 5 }, { 4, 2 }, { 8, 3 } };
+        edge_map[6] = { { 4, 4 }, { 7, 4 }, { 8, 1 } };
+        edge_map[7] = { { 3, 3 }, { 6, 4 } };
+        edge_map[8] = { { 4, 5 }, { 5, 3 }, { 6, 1 } };
         /*
         (1) ------  (5) --- (8)
         \       /  ㅣ    /  \
