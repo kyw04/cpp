@@ -50,7 +50,7 @@ int main()
     std::vector<int> result = BellmanFord(G, src);
 
     std::cout << "[" << src << "번 정점으로부터 최소 거리]" << std::endl;
-    for (std::size_t i = 1; i <= V; i++)
+    for (std::size_t i = 1; i < V; i++)
     {
         std::cout << i << "번 정점: ";
         
