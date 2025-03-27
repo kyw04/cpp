@@ -18,7 +18,7 @@ template <typename T>
 class Graph
 {
 private:
-    unsigned V; // 정점의 개수
+    std::size_t V; // 정점의 개수
     std::vector<Edge<T>> edge_list;
 
 public:
@@ -27,7 +27,7 @@ public:
     template <typename U>
     friend std::ostream& operator<<(std::ostream& os, const Graph<U> G);
     
-    unsigned GetVertices() const { return V; }
+    std::size_t GetVertices() const { return V; }
     std::vector<Edge<T>> GetEdges() const { return edge_list; }
     std::vector<Edge<T>> GetEdges(unsigned v) const
     {
