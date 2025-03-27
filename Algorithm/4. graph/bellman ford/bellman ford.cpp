@@ -12,34 +12,55 @@ template <typename T>
 std::vector<T> BellmanFord(const Graph<T>& g, std::size_t src)
 {
     std::size_t v = g.GetVertices();
-    std::vector<int> distnace(v, UNKNOWN);
-    distnace[src] = 0;
+    std::vector<int> distance(v, UNKNOWN);
+    distance[src] = 0;
 
     for (std::size_t i = 0; i < v - 1; i++)
     {
         for (auto& e : g.GetEdges())
         {
-            if (distnace[e.src] == UNKNOWN) { continue; }
+            if (distance[e.src] == UNKNOWN) { continue; }
 
-            distnace[e.dst] = std::min(distnace[e.dst], distnace[e.src] + e.weight);
+            distance[e.dst] = std::min(distance[e.dst], distance[e.src] + e.weight);
         }
     }
 
-    return distnace;
+    for (auto& e : g.GetEdges())
+    {
+        if (distance[e.src] == UNKNOWN) { continue; }
+
+        if (distance[e.dst] > distance[e.src] + e.weight)
+        {
+            std::cout << "[음수 가중치 발견]" << std::endl;
+            return {};
+        }
+    }
+
+    return distance;
 }
 
 int main()
 {
     unsigned V = 6;
     Graph<int> G(V);
-    std::vector<Edge<int>> edge_map // 가중치 싸이클이 없는 그래프
-    {
+    std::vector<Edge<int>> edge_map
+    { // 가중치 싸이클이 있는 그래프
         { 1, 2, 3 },
-        { 2, 3, 5 },
-        { 2, 4, 10 },
-        { 4, 3, -7 },
-        { 3, 5, 2 }
+        { 2, 4, -8 },
+        { 3, 2, 3 },
+        { 3, 6, 5 },
+        { 4, 3, 3 },
+        { 3, 5, 2 },
+        { 5, 6, -1 },
+        { 6, 2, 8 }
     };
+    // { // 가중치 싸이클이 없는 그래프
+    //     { 1, 2, 3 },
+    //     { 2, 3, 5 },
+    //     { 2, 4, 10 },
+    //     { 4, 3, -7 },
+    //     { 3, 5, 2 }
+    // };
 
     for (auto& e : edge_map)
     {
@@ -49,7 +70,8 @@ int main()
     std::size_t src = 1;
     std::vector<int> result = BellmanFord(G, src);
 
-    std::cout << "[" << src << "번 정점으로부터 최소 거리]" << std::endl;
+    if (!result.empty())
+        std::cout << "[" << src << "번 정점으로부터 최소 거리]" << std::endl;
     for (std::size_t i = 1; i < V; i++)
     {
         std::cout << i << "번 정점: ";
@@ -59,6 +81,8 @@ int main()
         else
             std::cout << "방문하지 않음." << std::endl;
     }
+
+
 
     return 0;
 }
