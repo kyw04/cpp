@@ -1,27 +1,22 @@
 /*
 벨만 포드 알고리즘(Bellman-Ford)
 */
+#include "../Graph.hpp"
 #include <iostream>
 #include <algorithm>
 #include <vector>
 #include <climits>
 #define UNKNOWN __INT_MAX__
 
-struct Edge
+std::vector<int> BellmanFord(const Graph<int>& g, int src)
 {
-    int src;
-    int dst;
-    int weight;
-};
-
-std::vector<int> BellmanFord(const std::vector<Edge>& edges, int v, int src)
-{
+    unsigned v = g.GetVertices();
     std::vector<int> distnace(v, UNKNOWN);
     distnace[src] = 0;
 
-    for (int i = 0; i < v - 1; i++)
+    for (unsigned i = 0; i < v - 1; i++)
     {
-        for (auto& e : edges)
+        for (auto& e : g.GetEdges())
         {
             if (distnace[e.src] == UNKNOWN) { continue; }
 
@@ -34,28 +29,28 @@ std::vector<int> BellmanFord(const std::vector<Edge>& edges, int v, int src)
 
 int main()
 {
-    int V = 5;
-    std::vector<Edge> edges;
-    std::vector<std::vector<int>> edge_map
+    unsigned V = 5;
+    Graph<int> G(V + 1);
+    std::vector<Edge<int>> edge_map
     {
-        { 0, 1, 3 },
-        { 1, 2, 5 },
-        { 2, 1, 5 },
-        { 1, 3, 10 },
-        { 3, 2, -7 },
-        { 2, 4, 2 }
+        { 1, 2, 3 },
+        { 2, 3, 5 },
+        { 2, 4, 10 },
+        { 4, 3, -7 },
+        { 3, 5, 2 }
     };
 
     for (auto& e : edge_map)
     {
-        edges.emplace_back(Edge{ e[0], e[1], e[2] });
+        std::printf("%u, %u, %d\n", e.src, e.dst, e.weight);
+        G.AddEdge(Edge<int>{ e.src, e.dst, e.weight });
     }
 
-    int src = 0;
-    std::vector<int> result = BellmanFord(edges, V, src);
+    int src = 1;
+    std::vector<int> result = BellmanFord(G, src);
 
     std::cout << "[" << src << "번 정점으로부터 최소 거리]" << std::endl;
-    for (int i = 0; i < V; i++)
+    for (int i = 1; i <= V; i++)
     {
         std::cout << i << "번 정점: ";
         

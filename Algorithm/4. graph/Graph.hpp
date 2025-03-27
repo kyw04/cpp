@@ -28,7 +28,7 @@ public:
     friend std::ostream& operator<<(std::ostream& os, const Graph<U> G);
     
     unsigned GetVertices() const { return V; }
-    std::vector<Edge<T>>& GetEdges() const { return edge_list; }
+    std::vector<Edge<T>> GetEdges() const { return edge_list; }
     std::vector<Edge<T>> GetEdges(unsigned v) const
     {
         std::vector<Edge<T>> edge_from_v;
