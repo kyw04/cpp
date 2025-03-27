@@ -43,7 +43,6 @@ int main()
 
     for (auto& e : edge_map)
     {
-        std::printf("%u, %u, %d\n", e.src, e.dst, e.weight);
         G.AddEdge(Edge<int>{ e.src, e.dst, e.weight });
     }
 
