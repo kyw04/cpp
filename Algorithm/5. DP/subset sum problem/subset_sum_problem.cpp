@@ -16,7 +16,7 @@
 void GetAllSubsets(std::vector<int> set, std::vector<int> subset, int index,
                     std::vector<std::vector<std::vector<int>>>& all_subsets)
 {
-    if (index == set.size())
+    if (static_cast<size_t>(index) == set.size())
     {
         all_subsets[subset.size()].push_back(subset);
         return;
@@ -24,7 +24,7 @@ void GetAllSubsets(std::vector<int> set, std::vector<int> subset, int index,
     
     GetAllSubsets(set, subset, index + 1, all_subsets);
 
-    subset.push_back(set[index]);
+    subset.push_back(set[static_cast<size_t>(index)]);
     GetAllSubsets(set, subset, index + 1, all_subsets);
 }
 
@@ -34,7 +34,7 @@ bool SubsetSum_BruteForce(std::vector<int> set, int target)
     std::vector<std::vector<std::vector<int>>> all_subsets(set.size() + 1);
     GetAllSubsets(set, {}, 0, all_subsets);
 
-    for (auto size = 0; size <= set.size(); size++)
+    for (size_t size = 0; size <= set.size(); size++)
     {
         DEBUG("부분집합의 원소 개수: " << size << std::endl);
         for (auto subset : all_subsets[size])
